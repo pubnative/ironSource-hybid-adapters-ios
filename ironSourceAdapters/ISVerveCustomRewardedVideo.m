@@ -20,29 +20,29 @@
 //  THE SOFTWARE.
 //
 
-#import "ISVerveCustomInterstitial.h"
+#import "ISVerveCustomRewardedVideo.h"
 #import "ISVerveUtils.h"
 
-@interface ISVerveCustomInterstitial() <HyBidInterstitialAdDelegate>
+@interface ISVerveCustomRewardedVideo() <HyBidRewardedAdDelegate>
 
-@property (nonatomic, strong) HyBidInterstitialAd *interstitialAd;
-@property (nonatomic, weak) id <ISInterstitialAdDelegate> delegate;
+@property (nonatomic, strong) HyBidRewardedAd *rewardedAd;
+@property (nonatomic, weak) id <ISRewardedVideoAdDelegate> delegate;
 
 @end
 
-@implementation ISVerveCustomInterstitial
+@implementation ISVerveCustomRewardedVideo
 
 - (void)dealloc {
-    self.interstitialAd = nil;
+    self.rewardedAd = nil;
 }
 
-- (void)loadAdWithAdData:(ISAdData *)adData delegate:(id<ISInterstitialAdDelegate>)delegate {
+- (void)loadAdWithAdData:(ISAdData *)adData delegate:(id<ISRewardedVideoAdDelegate>)delegate {
     if ([ISVerveUtils isAppTokenValid:adData] && [ISVerveUtils isZoneIDValid:adData]) {
         if ([ISVerveUtils appToken:adData] != nil && [[ISVerveUtils appToken:adData] isEqualToString:[HyBidSettings sharedInstance].appToken]) {
             self.delegate = delegate;
-            self.interstitialAd = [[HyBidInterstitialAd alloc] initWithZoneID:[ISVerveUtils zoneID:adData] andWithDelegate:self];
-            self.interstitialAd.isMediation = YES;
-            [self.interstitialAd load];
+            self.rewardedAd = [[HyBidRewardedAd alloc] initWithZoneID:[ISVerveUtils zoneID:adData] andWithDelegate:self];
+            self.rewardedAd.isMediation = YES;
+            [self.rewardedAd load];
         } else {
             NSString *errorMessage = @"The provided app token doesn't match the one used to initialise HyBid.";
             if (self.delegate && [self.delegate respondsToSelector:@selector(adDidFailToLoadWithErrorType:errorCode:errorMessage:)]) {
@@ -55,7 +55,7 @@
             }
         }
     } else {
-        NSString *errorMessage = @"Could not find the required params in ISVerveCustomInterstitial ad data.";
+        NSString *errorMessage = @"Could not find the required params in ISVerveCustomRewardedVideo ad data.";
         if (self.delegate && [self.delegate respondsToSelector:@selector(adDidFailToLoadWithErrorType:errorCode:errorMessage:)]) {
             [HyBidLogger errorLogFromClass:NSStringFromClass([self class])
                                 fromMethod:NSStringFromSelector(_cmd)
@@ -68,8 +68,8 @@
 }
 
 - (BOOL)isAdAvailableWithAdData:(ISAdData *)adData {
-    if (self.interstitialAd) {
-        return self.interstitialAd.isReady;
+    if (self.rewardedAd) {
+        return self.rewardedAd.isReady;
     } else {
         return NO;
     }
@@ -77,12 +77,12 @@
 
 - (void)showAdWithViewController:(UIViewController *)viewController
                           adData:(ISAdData *)adData
-                        delegate:(id<ISInterstitialAdDelegate>)delegate {
-    if (self.interstitialAd) {
-        if ([self.interstitialAd respondsToSelector:@selector(showFromViewController:)]) {
-            [self.interstitialAd showFromViewController:viewController];
+                        delegate:(id<ISRewardedVideoAdDelegate>)delegate {
+    if (self.rewardedAd) {
+        if ([self.rewardedAd respondsToSelector:@selector(showFromViewController:)]) {
+            [self.rewardedAd showFromViewController:viewController];
         } else {
-            [self.interstitialAd show];
+            [self.rewardedAd show];
         }
     } else {
         NSString *errorMessage = @"Error when showing the ad.";
@@ -95,15 +95,15 @@
     }
 }
 
-#pragma mark - HyBidInterstitialAdDelegate
+#pragma mark - HyBidRewardedAdDelegate
 
-- (void)interstitialDidLoad {
+- (void)rewardedDidLoad {
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoad)]) {
         [self.delegate adDidLoad];
     }
 }
 
-- (void)interstitialDidFailWithError:(NSError *)error {
+- (void)rewardedDidFailWithError:(NSError *)error {
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidFailToLoadWithErrorType:errorCode:errorMessage:)]) {
         [HyBidLogger errorLogFromClass:NSStringFromClass([self class])
                             fromMethod:NSStringFromSelector(_cmd)
@@ -114,13 +114,13 @@
     }
 }
 
-- (void)interstitialDidTrackClick {
+- (void)rewardedDidTrackClick {
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClick)]) {
         [self.delegate adDidClick];
     }
 }
 
-- (void)interstitialDidTrackImpression {
+- (void)rewardedDidTrackImpression {
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(adDidOpen)]) {
             [self.delegate adDidOpen];
@@ -131,12 +131,26 @@
         if ([self.delegate respondsToSelector:@selector(adDidBecomeVisible)]) {
             [self.delegate adDidBecomeVisible];
         }
+        if ([self.delegate respondsToSelector:@selector(adDidStart)]) {
+            [self.delegate adDidStart];
+        }
     }
 }
 
-- (void)interstitialDidDismiss {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClose)]) {
-        [self.delegate adDidClose];
+- (void)rewardedDidDismiss {
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(adDidClose)]) {
+            [self.delegate adDidClose];
+        }
+        if ([self.delegate respondsToSelector:@selector(adDidEnd)]) {
+            [self.delegate adDidEnd];
+        }
+    }
+}
+
+- (void)onReward {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adRewarded)]) {
+        [self.delegate adRewarded];
     }
 }
 

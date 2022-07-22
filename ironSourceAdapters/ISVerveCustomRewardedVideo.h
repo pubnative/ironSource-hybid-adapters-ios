@@ -23,7 +23,6 @@
 #import "IronSource/IronSource.h"
 #import <HyBid/HyBid.h>
 
-@interface ISVerveCustomAdapter : ISBaseNetworkAdapter
+@interface ISVerveCustomRewardedVideo : ISBaseRewardedVideo
 
 @end
-
