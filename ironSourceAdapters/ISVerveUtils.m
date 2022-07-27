@@ -22,8 +22,8 @@
 
 #import "ISVerveUtils.h"
 
-NSString *const ISVerveAdapterKeyZoneID = @"pn_zone_id";
-NSString *const ISVerveAdapterKeyAppToken = @"pn_app_token";
+NSString *const ISVerveAdapterKeyZoneID = @"zoneId";
+NSString *const ISVerveAdapterKeyAppToken = @"appToken";
 
 @implementation ISVerveUtils
 
