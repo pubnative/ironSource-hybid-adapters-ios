@@ -41,7 +41,7 @@
 }
 
 - (NSString *)networkSDKVersion {
-    return @"2.15.0.0";
+    return @"2.15.0";
 }
 
 - (NSString *)adapterVersion {
