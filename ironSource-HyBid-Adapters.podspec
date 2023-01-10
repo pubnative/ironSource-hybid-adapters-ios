@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ironSource-HyBid-Adapters"
-  spec.version      = "2.16.2.0"
+  spec.version      = "2.17.0.0"
   spec.summary      = "HyBid iOS SDK Adapters (Mediation) for ironSource"
   spec.description = <<-DESC
                      Supported ad formats:
@@ -35,7 +35,7 @@ Pod::Spec.new do |spec|
 
   spec.authors      = { "Can Soykarafakili" => "can.soykarafakili@pubnative.net", "Eros Garcia Ponte" => "eros.ponte@pubnative.net", "Fares Benhamouda" => "fares.benhamouda@pubnative.net", "Orkhan Alizada" => "orkhan.alizada@pubnative.net"  }
   spec.platform     = :ios, '10.0'
-  spec.source       = { :git => "https://github.com/pubnative/ironSource-hybid-adapters-ios.git", :tag => "2.16.2.0" }
+  spec.source       = { :git => "https://github.com/pubnative/ironSource-hybid-adapters-ios.git", :tag => "2.17.0.0" }
 
   spec.source_files = 'ironSourceAdapters/**/*.{swift,h,m}'
   spec.static_framework = true
@@ -43,6 +43,6 @@ Pod::Spec.new do |spec|
   spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
   spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
 
-  spec.dependency 'HyBid', '2.16.2'
+  spec.dependency 'HyBid', '2.17.0'
   spec.dependency 'IronSourceSDK', '7.2.0'
 end
