@@ -45,7 +45,7 @@
 }
 
 - (NSString *)adapterVersion {
-    return @"2.18.0.0";
+    return @"2.18.0.1";
 }
 
 @end
