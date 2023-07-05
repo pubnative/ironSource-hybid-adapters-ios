@@ -40,9 +40,6 @@ Pod::Spec.new do |spec|
   spec.source_files = 'ironSourceAdapters/**/*.{swift,h,m}'
   spec.static_framework = true
 
-  spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
-  spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
-
   spec.dependency 'HyBid', '2.19.0-beta3'
-  spec.dependency 'IronSourceSDK', '7.3.0.0'
+  spec.dependency 'IronSourceSDK','7.3.0.0'
 end
