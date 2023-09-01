@@ -41,5 +41,5 @@ Pod::Spec.new do |spec|
   spec.static_framework = true
 
   spec.dependency 'HyBid', '2.20.0-beta3'
-  spec.dependency 'IronSourceSDK','7.3.0.0'
+  spec.dependency 'IronSourceSDK','7.4.0.0'
 end
