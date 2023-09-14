@@ -45,7 +45,7 @@
 }
 
 - (NSString *)adapterVersion {
-    return @"2.20.0-beta5.0";
+    return @"2.20.0-beta5.1";
 }
 
 @end
