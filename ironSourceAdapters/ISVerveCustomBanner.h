@@ -20,32 +20,14 @@
 //  THE SOFTWARE.
 //
 
-#import "ISVerveCustomAdapter.h"
-#import "ISVerveUtils.h"
+#import "IronSource/IronSource.h"
+#import <HyBid/HyBid.h>
+#if __has_include(<HyBid/HyBid-Swift.h>)
+    #import <HyBid/HyBid-Swift.h>
+#else
+    #import "HyBid-Swift.h"
+#endif
 
-@implementation ISVerveCustomAdapter
-
-- (void)init:(ISAdData *)adData delegate:(id<ISNetworkInitializationDelegate>)delegate {
-       if (![ISVerveUtils isAppTokenValid:adData]) {
-           if (delegate && [delegate respondsToSelector:@selector(onInitDidFailWithErrorCode:errorMessage:)]) {
-               [delegate onInitDidFailWithErrorCode:ISAdapterErrorMissingParams
-                                       errorMessage:@"HyBid initialisation failed: Missing app token"];
-           }
-       } else {
-           [HyBid initWithAppToken:[ISVerveUtils appToken:adData] completion:^(BOOL success) {
-               if (delegate && [delegate respondsToSelector:@selector(onInitDidSucceed)]) {
-                   [delegate onInitDidSucceed];
-               }
-           }];
-       }
-}
-
-- (NSString *)networkSDKVersion {
-    return @"2.20.0";
-}
-
-- (NSString *)adapterVersion {
-    return @"2.20.0.0";
-}
+@interface ISVerveCustomBanner : ISBaseBanner
 
 @end
