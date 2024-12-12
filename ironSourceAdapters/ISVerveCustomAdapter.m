@@ -26,18 +26,22 @@
 @implementation ISVerveCustomAdapter
 
 - (void)init:(ISAdData *)adData delegate:(id<ISNetworkInitializationDelegate>)delegate {
-       if (![ISVerveUtils isAppTokenValid:adData]) {
-           if (delegate && [delegate respondsToSelector:@selector(onInitDidFailWithErrorCode:errorMessage:)]) {
-               [delegate onInitDidFailWithErrorCode:ISAdapterErrorMissingParams
+    if (![ISVerveUtils isAppTokenValid:adData]) {
+        if ([HyBid isInitialized]) {
+            if (delegate && [delegate respondsToSelector:@selector(onInitDidSucceed)]) {
+                [delegate onInitDidSucceed];
+            }
+        } else if (delegate && [delegate respondsToSelector:@selector(onInitDidFailWithErrorCode:errorMessage:)]) {
+            [delegate onInitDidFailWithErrorCode:ISAdapterErrorMissingParams
                                        errorMessage:@"HyBid initialisation failed: Missing app token"];
-           }
-       } else {
-           [HyBid initWithAppToken:[ISVerveUtils appToken:adData] completion:^(BOOL success) {
-               if (delegate && [delegate respondsToSelector:@selector(onInitDidSucceed)]) {
-                   [delegate onInitDidSucceed];
-               }
-           }];
-       }
+        }
+    } else {
+        [HyBid initWithAppToken:[ISVerveUtils appToken:adData] completion:^(BOOL success) {
+            if (delegate && [delegate respondsToSelector:@selector(onInitDidSucceed)]) {
+                [delegate onInitDidSucceed];
+            }
+        }];
+    }
 }
 
 - (NSString *)networkSDKVersion {
@@ -45,7 +49,7 @@
 }
 
 - (NSString *)adapterVersion {
-    return @"3.1.4.0";
+    return @"3.1.4.1";
 }
 
 @end
