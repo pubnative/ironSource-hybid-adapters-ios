@@ -1,5 +1,5 @@
 //
-//  Copyright © 2024 PubNative. All rights reserved.
+//  Copyright © 2021 PubNative. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -45,11 +45,11 @@
 }
 
 - (NSString *)networkSDKVersion {
-    return @"3.1.4";
+    return @"3.2.0";
 }
 
 - (NSString *)adapterVersion {
-    return @"3.1.4.1";
+    return @"3.2.0.0";
 }
 
 @end
