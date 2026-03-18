@@ -33,6 +33,19 @@ pod 'ironSource-HyBid-Adapters', '3.7.1.0'
 5. Based on your needs, define custom events using the [Mediation]() page to finish the integration.
 6. You’re done.
 
+#### Swift Package Manager
+The Swift Package Manager is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+To integrate the IronSource HyBid Adapters into your Xcode project using Swift Package Manager:
+
+Add it to the dependencies of your Package.swift:
+```swift
+dependencies: [
+    .package(url: "https://github.com/pubnative/ironSource-hybid-adapters-ios", branch:"master")
+]
+```
+Enable the -ObjC flag in Xcode: click on your project settings, go to Build Settings, search for Other Linker Flags and add -ObjC.
+
 #### Manually
 
 1. Integrate latest version of HyBid iOS SDK to your project using [HyBid Setup Guide](https://github.com/pubnative/pubnative-hybid-ios-sdk/wiki/Setup-HyBid).
