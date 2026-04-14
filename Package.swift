@@ -14,7 +14,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/vervegroup/hybid-ios-spm-sdk.git", .upToNextMajor(from: "3.7.1")),
+        .package(url: "https://github.com/vervegroup/hybid-ios-spm-sdk.git", exact: "3.8.0"),
         .package(url: "https://github.com/ironsource-mobile/Unity-Mediation-iAds-Swift-Package.git", .upToNextMajor(from: "9.3.0")),
         .package(url: "https://github.com/ironsource-mobile/Unity-Ad-Quality-Swift-Package.git", .upToNextMajor(from: "9.2.1"))
     ],
